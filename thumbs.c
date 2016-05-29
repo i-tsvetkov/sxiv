@@ -582,6 +582,9 @@ bool tns_zoom(tns_t *tns, int d)
 	tns->zl = MAX(tns->zl, 0);
 	tns->zl = MIN(tns->zl, ARRLEN(thumb_sizes)-1);
 
+	if (d == 0)
+		tns->zl = THUMB_SIZE;
+
 	tns->bw = THUMB_BORDERS[tns->zl];
 	tns->dim = thumb_sizes[tns->zl] + 2 * (tns->bw + THUMB_PADDING + THUMB_MARGIN);
 

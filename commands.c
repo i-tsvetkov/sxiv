@@ -390,9 +390,12 @@ bool ci_drag(arg_t _)
 	return true;
 }
 
-bool ci_set_zoom(arg_t zl)
+bool cg_set_zoom(arg_t zl)
 {
-	return img_zoom(&img, (prefix ? prefix : zl) / 100.0);
+	if (mode == MODE_THUMB)
+		return tns_zoom(&tns, 0);
+	else
+		return img_zoom(&img, (prefix ? prefix : zl) / 100.0);
 }
 
 bool ci_fit_to_win(arg_t sm)
