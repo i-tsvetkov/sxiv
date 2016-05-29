@@ -501,15 +501,18 @@ void tns_highlight(tns_t *tns, int n, bool hl)
 		win_t *win = tns->win;
 		thumb_t *t = &tns->thumbs[n];
 		unsigned long col;
-		int oxy = (tns->bw + 1) / 2 + 1, owh = tns->bw + 2;
 
 		if (hl)
 			col = win->selcol;
 		else
 			col = win->fullscreen ? win->fscol : win->bgcol;
 
-		win_draw_rect(win, t->x - oxy, t->y - oxy, t->w + owh, t->h + owh,
-		              false, tns->bw, col);
+		int x = t->x - THUMB_PADDING - tns->bw / 2 - tns->bw % 2,
+		    y = t->y - THUMB_PADDING - tns->bw / 2 - tns->bw % 2,
+		    w = t->w + 2 * THUMB_PADDING + tns->bw,
+		    h = t->h + 2 * THUMB_PADDING + tns->bw;
+
+		win_draw_rect(win, x, y, w, h, false, tns->bw, col);
 
 		if (tns->files[n].flags & FF_MARK)
 			tns_mark(tns, n, true);
@@ -581,9 +584,8 @@ bool tns_zoom(tns_t *tns, int d)
 	tns->zl = MAX(tns->zl, 0);
 	tns->zl = MIN(tns->zl, ARRLEN(thumb_sizes)-1);
 
-	tns->bw = ((thumb_sizes[tns->zl] - 1) >> 5) + 1;
-	tns->bw = MIN(tns->bw, 4);
-	tns->dim = thumb_sizes[tns->zl] + 2 * tns->bw + 6;
+	tns->bw = THUMB_BORDERS[tns->zl];
+	tns->dim = thumb_sizes[tns->zl] + 2 * (tns->bw + THUMB_PADDING + THUMB_MARGIN);
 
 	if (tns->zl != oldzl) {
 		for (i = 0; i < *tns->cnt; i++)
