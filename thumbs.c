@@ -480,11 +480,11 @@ void tns_mark(tns_t *tns, int n, bool mark)
 		win_t *win = tns->win;
 		thumb_t *t = &tns->thumbs[n];
 		unsigned long col = win->fullscreen ? win->fscol : win->bgcol;
-		int x = t->x + t->w - 2 * THUMB_PADDINGS[tns->zl],
-		    y = t->y + t->h - 2 * THUMB_PADDINGS[tns->zl];
+		int x = t->x + t->w - 3 * tns->bw - THUMB_PADDINGS[tns->zl],
+		    y = t->y + t->h - 3 * tns->bw - THUMB_PADDINGS[tns->zl];
 
-		win_draw_rect(win, x - 1, y - 1, tns->bw + 2, tns->bw + 2, true, 1, col);
-		win_draw_rect(win, x, y, tns->bw, tns->bw, true, 1, win->selcol);
+		win_draw_rect(win, x - tns->bw, y - tns->bw, 4 * tns->bw, 4 * tns->bw, true, 1, col);
+		win_draw_rect(win, x, y, 2 * tns->bw, 2 * tns->bw, true, 1, win->selcol);
 
 		tns->dirty = true; /* I Have No Idea What I’m Doing (https://youtu.be/4Rg3sAb8Id8) */
 
