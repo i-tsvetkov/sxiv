@@ -87,6 +87,8 @@ static const keymap_t keys[] = {
 	{ ControlMask,  XK_Up,            g_scroll_screen,      DIR_UP },
 	{ ControlMask,  XK_l,             g_scroll_screen,      DIR_RIGHT },
 	{ ControlMask,  XK_Right,         g_scroll_screen,      DIR_RIGHT },
+	{ 0,            XK_Prior,         g_scroll_screen,      DIR_UP },
+	{ 0,            XK_Next,          g_scroll_screen,      DIR_DOWN },
 	{ 0,            XK_plus,          g_zoom,               +1 },
 	{ 0,            XK_KP_Add,        g_zoom,               +1 },
 	{ 0,            XK_minus,         g_zoom,               -1 },
