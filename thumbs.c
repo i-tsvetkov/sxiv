@@ -424,8 +424,8 @@ void tns_render(tns_t *tns)
 	win_clear(win);
 	imlib_context_set_drawable(win->buf.pm);
 
-	tns->cols = MAX(1, (win->w - 2 * abs(THUMB_MARGIN)) / tns->dim);
-	tns->rows = MAX(1, (win->h - 2 * abs(THUMB_MARGIN)) / tns->dim);
+	tns->cols = MAX(1, (win->w - 2 * abs(THUMB_MARGINS[tns->zl])) / tns->dim);
+	tns->rows = MAX(1, (win->h - 2 * abs(THUMB_MARGINS[tns->zl])) / tns->dim);
 
 	if (*tns->cnt < tns->cols * tns->rows) {
 		tns->first = 0;
@@ -439,8 +439,8 @@ void tns_render(tns_t *tns)
 			cnt -= r % tns->cols;
 	}
 	r = cnt % tns->cols ? 1 : 0;
-	tns->x = x = (win->w - MIN(cnt, tns->cols) * tns->dim) / 2 + tns->bw + THUMB_PADDING + THUMB_MARGIN;
-	tns->y = y = (win->h - (cnt / tns->cols + r) * tns->dim) / 2 + tns->bw + THUMB_PADDING + THUMB_MARGIN;
+	tns->x = x = (win->w - MIN(cnt, tns->cols) * tns->dim) / 2 + tns->bw + THUMB_PADDINGS[tns->zl] + THUMB_MARGINS[tns->zl];
+	tns->y = y = (win->h - (cnt / tns->cols + r) * tns->dim) / 2 + tns->bw + THUMB_PADDINGS[tns->zl] + THUMB_MARGINS[tns->zl];
 	tns->loadnext = *tns->cnt;
 	tns->end = tns->first + cnt;
 
@@ -480,8 +480,8 @@ void tns_mark(tns_t *tns, int n, bool mark)
 		win_t *win = tns->win;
 		thumb_t *t = &tns->thumbs[n];
 		unsigned long col = win->fullscreen ? win->fscol : win->bgcol;
-		int x = t->x + t->w - 2 * THUMB_PADDING,
-		    y = t->y + t->h - 2 * THUMB_PADDING;
+		int x = t->x + t->w - 2 * THUMB_PADDINGS[tns->zl],
+		    y = t->y + t->h - 2 * THUMB_PADDINGS[tns->zl];
 
 		win_draw_rect(win, x - 1, y - 1, tns->bw + 2, tns->bw + 2, true, 1, col);
 		win_draw_rect(win, x, y, tns->bw, tns->bw, true, 1, win->selcol);
@@ -505,10 +505,10 @@ void tns_highlight(tns_t *tns, int n, bool hl)
 		else
 			col = win->fullscreen ? win->fscol : win->bgcol;
 
-		int x = t->x - THUMB_PADDING - tns->bw / 2 - tns->bw % 2,
-		    y = t->y - THUMB_PADDING - tns->bw / 2 - tns->bw % 2,
-		    w = t->w + 2 * THUMB_PADDING + tns->bw,
-		    h = t->h + 2 * THUMB_PADDING + tns->bw;
+		int x = t->x - THUMB_PADDINGS[tns->zl] - tns->bw / 2 - tns->bw % 2,
+		    y = t->y - THUMB_PADDINGS[tns->zl] - tns->bw / 2 - tns->bw % 2,
+		    w = t->w + 2 * THUMB_PADDINGS[tns->zl] + tns->bw,
+		    h = t->h + 2 * THUMB_PADDINGS[tns->zl] + tns->bw;
 
 		win_draw_rect(win, x, y, w, h, false, tns->bw, col);
 
@@ -586,7 +586,7 @@ bool tns_zoom(tns_t *tns, int d)
 		tns->zl = THUMB_SIZE;
 
 	tns->bw = THUMB_BORDERS[tns->zl];
-	tns->dim = thumb_sizes[tns->zl] + 2 * (tns->bw + THUMB_PADDING + THUMB_MARGIN);
+	tns->dim = thumb_sizes[tns->zl] + 2 * (tns->bw + THUMB_PADDINGS[tns->zl] + THUMB_MARGINS[tns->zl]);
 
 	if (tns->zl != oldzl) {
 		for (i = 0; i < *tns->cnt; i++)

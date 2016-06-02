@@ -57,8 +57,8 @@ static const bool ALPHA_LAYER = false;
 static const int thumb_sizes[] = { 32, 64, 96, 128, 160 };
 
 const int THUMB_BORDERS[] = { 2, 2, 2, 2, 2 };
-const int THUMB_MARGIN = -1;
-const int THUMB_PADDING = 2;
+const int THUMB_MARGINS[] = { -1, -1, -1, -1, -1 };
+const int THUMB_PADDINGS[] = { 2, 2, 2, 2, 2 };
 
 /* thumbnail size at startup, index into thumb_sizes[]: */
 static const int THUMB_SIZE = 3;
