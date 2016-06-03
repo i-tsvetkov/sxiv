@@ -895,6 +895,9 @@ int main(int argc, char **argv)
 		win.h += win.bar.h;
 	}
 
+	win.w = win.w < MIN_WIN_WIDTH  ? MIN_WIN_WIDTH  : win.w;
+	win.h = win.h < MIN_WIN_HEIGHT ? MIN_WIN_HEIGHT : win.h;
+
 	win_open(&win);
 	win_set_cursor(&win, CURSOR_WATCH);
 

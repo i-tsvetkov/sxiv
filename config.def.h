@@ -3,7 +3,10 @@
 /* default window dimensions (overwritten via -g option): */
 enum {
 	WIN_WIDTH  = 800,
-	WIN_HEIGHT = 600
+	WIN_HEIGHT = 600,
+	/* those constrains work only when fitting to a single image */
+	MIN_WIN_WIDTH  = 160,
+	MIN_WIN_HEIGHT = 160
 };
 
 /* bar font:
