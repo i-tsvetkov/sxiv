@@ -219,13 +219,14 @@ Imlib_Image tns_scale_down(Imlib_Image im, int dim)
 
 	int s = (w < h) ? w : h;
 
-	if (dim < w || dim < h) {
-		imlib_context_set_anti_alias(1);
-		im = imlib_create_cropped_scaled_image(x, y, s, s, dim, dim);
-		if (im == NULL)
-			error(EXIT_FAILURE, ENOMEM, NULL);
-		imlib_free_image_and_decache();
-	}
+	imlib_context_set_anti_alias(1);
+	im = imlib_create_cropped_scaled_image(x, y, s, s, dim, dim);
+
+	if (im == NULL)
+		error(EXIT_FAILURE, ENOMEM, NULL);
+
+	imlib_free_image_and_decache();
+
 	return im;
 }
 
