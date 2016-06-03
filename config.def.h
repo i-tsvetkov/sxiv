@@ -80,6 +80,8 @@ static const keymap_t keys[] = {
 	{ ControlMask,  XK_x,             g_prefix_external,    None },
 	{ 0,            XK_g,             g_first,              None },
 	{ 0,            XK_G,             g_n_or_last,          None },
+	{ ControlMask,  XK_Home,          g_first,              None },
+	{ ControlMask,  XK_End,           g_n_or_last,          None },
 	{ 0,            XK_r,             g_reload_image,       None },
 	{ 0,            XK_D,             g_remove_image,       None },
 	{ ControlMask,  XK_h,             g_scroll_screen,      DIR_LEFT },
