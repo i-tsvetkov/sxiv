@@ -65,13 +65,13 @@ static const bool ALPHA_LAYER = false;
 #ifdef _THUMBS_CONFIG
 
 /* thumbnail sizes in pixels (width == height): */
-static const int thumb_sizes[] = { 64, 116, 142, 177, 240 };
+static const int THUMB_SIZES[] = { 64, 116, 142, 177, 240 };
 
 const int THUMB_BORDERS[]  = { 1,  2,  2,  3,  3 };
 const int THUMB_MARGINS[]  = { 0, -1, -1, -1, -1 };
 const int THUMB_PADDINGS[] = { 1,  2,  2,  2,  2 };
 
-/* thumbnail size at startup, index into thumb_sizes[]: */
+/* thumbnail size at startup, index into THUMB_SIZES[]: */
 static const int THUMB_SIZE = 2;
 
 #endif
