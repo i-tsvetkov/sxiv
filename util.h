@@ -28,52 +28,55 @@
 #include "types.h"
 
 #ifndef MIN
-#define MIN(a,b) ((a) < (b) ? (a) : (b))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
 #endif
 #ifndef MAX
-#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
 #endif
 
 #define ARRLEN(a) (sizeof(a) / sizeof((a)[0]))
 
-#define STREQ(s1,s2) (strcmp((s1), (s2)) == 0)
+#define STREQ(s1, s2) (strcmp((s1), (s2)) == 0)
 
-#define TV_DIFF(t1,t2) (((t1)->tv_sec  - (t2)->tv_sec ) * 1000 + \
-                        ((t1)->tv_usec - (t2)->tv_usec) / 1000)
+#define TV_DIFF(t1, t2)                                                        \
+  (((t1)->tv_sec - (t2)->tv_sec) * 1000 +                                      \
+   ((t1)->tv_usec - (t2)->tv_usec) / 1000)
 
-#define TV_SET_MSEC(tv,t) {             \
-  (tv)->tv_sec  = (t) / 1000;           \
-  (tv)->tv_usec = (t) % 1000 * 1000;    \
-}
+#define TV_SET_MSEC(tv, t)                                                     \
+  {                                                                            \
+    (tv)->tv_sec = (t) / 1000;                                                 \
+    (tv)->tv_usec = (t) % 1000 * 1000;                                         \
+  }
 
-#define TV_ADD_MSEC(tv,t) {             \
-  (tv)->tv_sec  += (t) / 1000;          \
-  (tv)->tv_usec += (t) % 1000 * 1000;   \
-}
+#define TV_ADD_MSEC(tv, t)                                                     \
+  {                                                                            \
+    (tv)->tv_sec += (t) / 1000;                                                \
+    (tv)->tv_usec += (t) % 1000 * 1000;                                        \
+  }
 
 typedef struct {
-	DIR *dir;
-	char *name;
-	int d;
+  DIR *dir;
+  char *name;
+  int d;
 
-	char **stack;
-	int stcap;
-	int stlen;
+  char **stack;
+  int stcap;
+  int stlen;
 } r_dir_t;
 
 extern const char *progname;
 
-void* emalloc(size_t);
-void* erealloc(void*, size_t);
-char* estrdup(const char*);
+void *emalloc(size_t);
+void *erealloc(void *, size_t);
+char *estrdup(const char *);
 
-void error(int, int, const char*, ...);
+void error(int, int, const char *, ...);
 
-void size_readable(float*, const char**);
+void size_readable(float *, const char **);
 
-int r_opendir(r_dir_t*, const char*);
-int r_closedir(r_dir_t*);
-char* r_readdir(r_dir_t*);
-int r_mkdir(char*);
+int r_opendir(r_dir_t *, const char *);
+int r_closedir(r_dir_t *);
+char *r_readdir(r_dir_t *);
+int r_mkdir(char *);
 
 #endif /* UTIL_H */

@@ -23,68 +23,46 @@
 
 #define CLEANUP
 
-typedef enum {
-	BO_BIG_ENDIAN,
-	BO_LITTLE_ENDIAN
-} byteorder_t;
+typedef enum { BO_BIG_ENDIAN, BO_LITTLE_ENDIAN } byteorder_t;
+
+typedef enum { MODE_IMAGE, MODE_THUMB } appmode_t;
 
 typedef enum {
-	MODE_IMAGE,
-	MODE_THUMB
-} appmode_t;
-
-typedef enum {
-	DIR_LEFT  = 1,
-	DIR_RIGHT = 2,
-	DIR_UP    = 4,
-	DIR_DOWN  = 8
+  DIR_LEFT = 1,
+  DIR_RIGHT = 2,
+  DIR_UP = 4,
+  DIR_DOWN = 8
 } direction_t;
 
-typedef enum {
-	DEGREE_90  = 1,
-	DEGREE_180 = 2,
-	DEGREE_270 = 3
-} degree_t;
+typedef enum { DEGREE_90 = 1, DEGREE_180 = 2, DEGREE_270 = 3 } degree_t;
+
+typedef enum { FLIP_HORIZONTAL = 1, FLIP_VERTICAL = 2 } flipdir_t;
 
 typedef enum {
-	FLIP_HORIZONTAL = 1,
-	FLIP_VERTICAL   = 2
-} flipdir_t;
-
-typedef enum {
-	SCALE_DOWN,
-	SCALE_FIT,
-	SCALE_WIDTH,
-	SCALE_HEIGHT,
-	SCALE_ZOOM
+  SCALE_DOWN,
+  SCALE_FIT,
+  SCALE_WIDTH,
+  SCALE_HEIGHT,
+  SCALE_ZOOM
 } scalemode_t;
 
-typedef enum {
-	CURSOR_ARROW,
-	CURSOR_NONE,
-	CURSOR_HAND,
-	CURSOR_WATCH
-} cursor_t;
+typedef enum { CURSOR_ARROW, CURSOR_NONE, CURSOR_HAND, CURSOR_WATCH } cursor_t;
 
-typedef enum {
-	FF_WARN    = 1,
-	FF_MARK    = 2,
-	FF_TN_INIT = 4
-} fileflags_t;
+typedef enum { FF_WARN = 1, FF_MARK = 2, FF_TN_INIT = 4 } fileflags_t;
 
 typedef struct {
-	const char *name; /* as given by user */
-	const char *path; /* always absolute */
-	const char *base;
-	fileflags_t flags;
+  const char *name; /* as given by user */
+  const char *path; /* always absolute */
+  const char *base;
+  fileflags_t flags;
 } fileinfo_t;
 
 /* timeouts in milliseconds: */
 enum {
-	TO_REDRAW_RESIZE = 75,
-	TO_REDRAW_THUMBS = 200,
-	TO_CURSOR_HIDE   = 1200,
-	TO_DOUBLE_CLICK  = 300
+  TO_REDRAW_RESIZE = 75,
+  TO_REDRAW_THUMBS = 200,
+  TO_CURSOR_HIDE = 1200,
+  TO_DOUBLE_CLICK = 300
 };
 
 typedef void (*timeout_f)(void);

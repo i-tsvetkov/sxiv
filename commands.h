@@ -32,26 +32,26 @@ typedef bool (*cmd_f)(arg_t);
 
 typedef enum {
 #include "commands.lst"
-	CMD_COUNT
+  CMD_COUNT
 } cmd_id_t;
 
 typedef struct {
-	int mode;
-	cmd_f func;
+  int mode;
+  cmd_f func;
 } cmd_t;
 
 typedef struct {
-	unsigned int mask;
-	KeySym ksym;
-	cmd_id_t cmd;
-	arg_t arg;
+  unsigned int mask;
+  KeySym ksym;
+  cmd_id_t cmd;
+  arg_t arg;
 } keymap_t;
 
 typedef struct {
-	unsigned int mask;
-	unsigned int button;
-	cmd_id_t cmd;
-	arg_t arg;
+  unsigned int mask;
+  unsigned int button;
+  cmd_id_t cmd;
+  arg_t arg;
 } button_t;
 
 const extern cmd_t cmds[CMD_COUNT];

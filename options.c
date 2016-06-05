@@ -28,136 +28,133 @@
 #include "config.h"
 
 options_t _options;
-const options_t *options = (const options_t*) &_options;
+const options_t *options = (const options_t *)&_options;
 
-void print_usage(void)
-{
-	printf("usage: sxiv [-abcfhioqrtvZ] [-G GAMMA] [-g GEOMETRY] [-n NUM] "
-	       "[-N NAME] [-S DELAY] [-s MODE] [-z ZOOM] FILES...\n");
+void print_usage(void) {
+  printf("usage: sxiv [-abcfhioqrtvZ] [-G GAMMA] [-g GEOMETRY] [-n NUM] "
+         "[-N NAME] [-S DELAY] [-s MODE] [-z ZOOM] FILES...\n");
 }
 
-void print_version(void)
-{
-	printf("sxiv %s - Simple X Image Viewer\n", VERSION);
+void print_version(void) {
+  printf("sxiv %s - Simple X Image Viewer\n", VERSION);
 }
 
-void parse_options(int argc, char **argv)
-{
-	int n, opt;
-	char *end, *s;
-	const char *scalemodes = "dfwh";
+void parse_options(int argc, char **argv) {
+  int n, opt;
+  char *end, *s;
+  const char *scalemodes = "dfwh";
 
-	progname = strrchr(argv[0], '/');
-	progname = progname ? progname + 1 : argv[0];
+  progname = strrchr(argv[0], '/');
+  progname = progname ? progname + 1 : argv[0];
 
-	_options.from_stdin = false;
-	_options.to_stdout = false;
-	_options.recursive = false;
-	_options.startnum = 0;
+  _options.from_stdin = false;
+  _options.to_stdout = false;
+  _options.recursive = false;
+  _options.startnum = 0;
 
-	_options.scalemode = SCALE_DOWN;
-	_options.zoom = 1.0;
-	_options.animate = false;
-	_options.gamma = 0;
-	_options.slideshow = 0;
+  _options.scalemode = SCALE_DOWN;
+  _options.zoom = 1.0;
+  _options.animate = false;
+  _options.gamma = 0;
+  _options.slideshow = 0;
 
-	_options.fullscreen = false;
-	_options.hide_bar = false;
-	_options.geometry = NULL;
-	_options.res_name = NULL;
+  _options.fullscreen = false;
+  _options.hide_bar = false;
+  _options.geometry = NULL;
+  _options.res_name = NULL;
 
-	_options.quiet = false;
-	_options.thumb_mode = false;
-	_options.clean_cache = false;
+  _options.quiet = false;
+  _options.thumb_mode = false;
+  _options.clean_cache = false;
 
-	while ((opt = getopt(argc, argv, "abcfG:g:hin:N:oqrS:s:tvZz:")) != -1) {
-		switch (opt) {
-			case '?':
-				print_usage();
-				exit(EXIT_FAILURE);
-			case 'a':
-				_options.animate = true;
-				break;
-			case 'b':
-				_options.hide_bar = true;
-				break;
-			case 'c':
-				_options.clean_cache = true;
-				break;
-			case 'f':
-				_options.fullscreen = true;
-				break;
-			case 'G':
-				n = strtol(optarg, &end, 0);
-				if (*end != '\0')
-					error(EXIT_FAILURE, 0, "Invalid argument for option -G: %s", optarg);
-				_options.gamma = n;
-				break;
-			case 'g':
-				_options.geometry = optarg;
-				break;
-			case 'h':
-				print_usage();
-				exit(EXIT_SUCCESS);
-			case 'i':
-				_options.from_stdin = true;
-				break;
-			case 'n':
-				n = strtol(optarg, &end, 0);
-				if (*end != '\0' || n <= 0)
-					error(EXIT_FAILURE, 0, "Invalid argument for option -n: %s", optarg);
-				_options.startnum = n - 1;
-				break;
-			case 'N':
-				_options.res_name = optarg;
-				break;
-			case 'o':
-				_options.to_stdout = true;
-				break;
-			case 'q':
-				_options.quiet = true;
-				break;
-			case 'r':
-				_options.recursive = true;
-				break;
-			case 'S':
-				n = strtol(optarg, &end, 0);
-				if (*end != '\0' || n <= 0)
-					error(EXIT_FAILURE, 0, "Invalid argument for option -S: %s", optarg);
-				_options.slideshow = n;
-				break;
-			case 's':
-				s = strchr(scalemodes, optarg[0]);
-				if (s == NULL || *s == '\0' || strlen(optarg) != 1)
-					error(EXIT_FAILURE, 0, "Invalid argument for option -s: %s", optarg);
-				_options.scalemode = s - scalemodes;
-				break;
-			case 't':
-				_options.thumb_mode = true;
-				break;
-			case 'v':
-				print_version();
-				exit(EXIT_SUCCESS);
-			case 'Z':
-				_options.scalemode = SCALE_ZOOM;
-				_options.zoom = 1.0;
-				break;
-			case 'z':
-				n = strtol(optarg, &end, 0);
-				if (*end != '\0' || n <= 0)
-					error(EXIT_FAILURE, 0, "Invalid argument for option -z: %s", optarg);
-				_options.scalemode = SCALE_ZOOM;
-				_options.zoom = (float) n / 100.0;
-				break;
-		}
-	}
+  while ((opt = getopt(argc, argv, "abcfG:g:hin:N:oqrS:s:tvZz:")) != -1) {
+    switch (opt) {
+    case '?':
+      print_usage();
+      exit(EXIT_FAILURE);
+    case 'a':
+      _options.animate = true;
+      break;
+    case 'b':
+      _options.hide_bar = true;
+      break;
+    case 'c':
+      _options.clean_cache = true;
+      break;
+    case 'f':
+      _options.fullscreen = true;
+      break;
+    case 'G':
+      n = strtol(optarg, &end, 0);
+      if (*end != '\0')
+        error(EXIT_FAILURE, 0, "Invalid argument for option -G: %s", optarg);
+      _options.gamma = n;
+      break;
+    case 'g':
+      _options.geometry = optarg;
+      break;
+    case 'h':
+      print_usage();
+      exit(EXIT_SUCCESS);
+    case 'i':
+      _options.from_stdin = true;
+      break;
+    case 'n':
+      n = strtol(optarg, &end, 0);
+      if (*end != '\0' || n <= 0)
+        error(EXIT_FAILURE, 0, "Invalid argument for option -n: %s", optarg);
+      _options.startnum = n - 1;
+      break;
+    case 'N':
+      _options.res_name = optarg;
+      break;
+    case 'o':
+      _options.to_stdout = true;
+      break;
+    case 'q':
+      _options.quiet = true;
+      break;
+    case 'r':
+      _options.recursive = true;
+      break;
+    case 'S':
+      n = strtol(optarg, &end, 0);
+      if (*end != '\0' || n <= 0)
+        error(EXIT_FAILURE, 0, "Invalid argument for option -S: %s", optarg);
+      _options.slideshow = n;
+      break;
+    case 's':
+      s = strchr(scalemodes, optarg[0]);
+      if (s == NULL || *s == '\0' || strlen(optarg) != 1)
+        error(EXIT_FAILURE, 0, "Invalid argument for option -s: %s", optarg);
+      _options.scalemode = s - scalemodes;
+      break;
+    case 't':
+      _options.thumb_mode = true;
+      break;
+    case 'v':
+      print_version();
+      exit(EXIT_SUCCESS);
+    case 'Z':
+      _options.scalemode = SCALE_ZOOM;
+      _options.zoom = 1.0;
+      break;
+    case 'z':
+      n = strtol(optarg, &end, 0);
+      if (*end != '\0' || n <= 0)
+        error(EXIT_FAILURE, 0, "Invalid argument for option -z: %s", optarg);
+      _options.scalemode = SCALE_ZOOM;
+      _options.zoom = (float)n / 100.0;
+      break;
+    }
+  }
 
-	_options.filenames = argv + optind;
-	_options.filecnt = argc - optind;
+  _options.filenames = argv + optind;
+  _options.filecnt = argc - optind;
 
-	if (_options.filecnt == 1 && STREQ(_options.filenames[0], "-")) {
-		_options.filenames++;
-		_options.filecnt--;
-		_options.from_stdin = true;
-	}
+  if (_options.filecnt == 1 && STREQ(_options.filenames[0], "-")) {
+    _options.filenames++;
+    _options.filecnt--;
+    _options.from_stdin = true;
+  }
 }
