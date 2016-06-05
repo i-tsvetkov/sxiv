@@ -2,25 +2,25 @@
 
 /* default window dimensions (overwritten via -g option): */
 enum {
-  WIN_WIDTH = 800,
-  WIN_HEIGHT = 600,
+  WIN_WIDTH  = 914,
+  WIN_HEIGHT = 618,
   /* those constrains work only when fitting to a single image */
-  MIN_WIN_WIDTH = 160,
-  MIN_WIN_HEIGHT = 160
+  MIN_WIN_WIDTH  = 256,
+  MIN_WIN_HEIGHT = 256
 };
 
 /* bar font:
  * (see X(7) section "FONT NAMES" for valid values)
  */
-static const char *const BAR_FONT = "-*-fixed-medium-r-*-*-13-*-*-*-*-60-*-*";
+static const char *const BAR_FONT = "-*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*";
 
 /* colors:
  * (see X(7) section "COLOR NAMES" for valid values)
  */
-static const char *const WIN_BG_COLOR = "#555555";
-static const char *const WIN_FS_COLOR = "#000000";
+static const char *const WIN_BG_COLOR = "#424242";
+static const char *const WIN_FS_COLOR = "#212121";
 static const char *const SEL_COLOR    = "#EEEEEE";
-static const char *const BAR_BG_COLOR = "#222222";
+static const char *const BAR_BG_COLOR = "#212121";
 static const char *const BAR_FG_COLOR = "#EEEEEE";
 
 #endif
@@ -29,8 +29,18 @@ static const char *const BAR_FG_COLOR = "#EEEEEE";
 /* levels (in percent) to use when zooming via '-' and '+':
  * (first/last value is used as min/max zoom level)
  */
-static const float zoom_levels[] = {12.5,  25.0,  50.0,  75.0, 100.0,
-                                    150.0, 200.0, 400.0, 800.0};
+static const float zoom_levels[] = {
+     10.0,  20.0,  30.0,  40.0,  50.0,  60.0,  70.0,  80.0,  90.0, 100.0,
+    110.0, 120.0, 130.0, 140.0, 150.0, 160.0, 170.0, 180.0, 190.0, 200.0,
+    210.0, 220.0, 230.0, 240.0, 250.0, 260.0, 270.0, 280.0, 290.0, 300.0,
+    310.0, 320.0, 330.0, 340.0, 350.0, 360.0, 370.0, 380.0, 390.0, 400.0,
+    410.0, 420.0, 430.0, 440.0, 450.0, 460.0, 470.0, 480.0, 490.0, 500.0,
+    510.0, 520.0, 530.0, 540.0, 550.0, 560.0, 570.0, 580.0, 590.0, 600.0,
+    610.0, 620.0, 630.0, 640.0, 650.0, 660.0, 670.0, 680.0, 690.0, 700.0,
+    710.0, 720.0, 730.0, 740.0, 750.0, 760.0, 770.0, 780.0, 790.0, 800.0,
+    810.0, 820.0, 830.0, 840.0, 850.0, 860.0, 870.0, 880.0, 890.0, 900.0,
+    910.0, 920.0, 930.0, 940.0, 950.0, 960.0, 970.0, 980.0, 990.0, 1000.0
+};
 
 /* default slideshow delay (in sec, overwritten via -S option): */
 enum { SLIDESHOW_DELAY = 5 };
@@ -55,14 +65,14 @@ static const bool ALPHA_LAYER = false;
 #ifdef _THUMBS_CONFIG
 
 /* thumbnail sizes in pixels (width == height): */
-static const int thumb_sizes[] = {32, 64, 96, 128, 160};
+static const int thumb_sizes[] = { 64, 116, 142, 177, 240 };
 
-const int THUMB_BORDERS[] = {2, 2, 2, 2, 2};
-const int THUMB_MARGINS[] = {-1, -1, -1, -1, -1};
-const int THUMB_PADDINGS[] = {2, 2, 2, 2, 2};
+const int THUMB_BORDERS[]  = { 1,  2,  2,  3,  3 };
+const int THUMB_MARGINS[]  = { 0, -1, -1, -1, -1 };
+const int THUMB_PADDINGS[] = { 1,  2,  2,  2,  2 };
 
 /* thumbnail size at startup, index into thumb_sizes[]: */
-static const int THUMB_SIZE = 3;
+static const int THUMB_SIZE = 2;
 
 #endif
 #ifdef _MAPPINGS_CONFIG
@@ -117,13 +127,9 @@ static const keymap_t keys[] = {
     {   0,            XK_n,             i_navigate,           +1               },
     {   0,            XK_n,             i_scroll_to_edge,     DIR_LEFT|DIR_UP  },
     {   0,            XK_space,         i_navigate,           +1               },
-    {   0,            XK_Right,         i_navigate,           +1               },
-    {   0,            XK_Up,            i_navigate,           +1               },
     {   0,            XK_p,             i_navigate,           -1               },
     {   0,            XK_p,             i_scroll_to_edge,     DIR_LEFT|DIR_UP  },
     {   0,            XK_BackSpace,     i_navigate,           -1               },
-    {   0,            XK_Left,          i_navigate,           -1               },
-    {   0,            XK_Down,          i_navigate,           -1               },
     {   0,            XK_bracketright,  i_navigate,           +10              },
     {   0,            XK_bracketleft,   i_navigate,           -10              },
     {   ControlMask,  XK_6,             i_alternate,          None             },
