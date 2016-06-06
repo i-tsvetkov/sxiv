@@ -1,4 +1,4 @@
-VERSION   := git-20151228
+VERSION   := git-$(shell date -d @$(shell git log -1 --format=%ct) +%Y%m%d)
 
 PREFIX    := /usr/local
 MANPREFIX := $(PREFIX)/share/man
