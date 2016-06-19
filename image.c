@@ -568,16 +568,17 @@ bool img_move(img_t *img, float dx, float dy) {
 
 bool img_pan(img_t *img, direction_t dir, int d) {
   /* d < 0: screen-wise
-   * d = 0: 1/5 of screen
+   * d = 0: 1/16 of screen
    * d > 0: num of pixels
    */
   float x, y;
+  const int ratio = 16;
 
   if (d > 0) {
     x = y = MAX(1, (float)d * img->zoom);
   } else {
-    x = img->win->w / (d < 0 ? 1 : 5);
-    y = img->win->h / (d < 0 ? 1 : 5);
+    x = img->win->w / (d < 0 ? 1 : ratio);
+    y = img->win->h / (d < 0 ? 1 : ratio);
   }
 
   switch (dir) {
