@@ -11,8 +11,8 @@ LIBS      := -lX11 -lImlib2
 
 # optional dependencies:
 # giflib: gif animations
-	CPPFLAGS += -DHAVE_GIFLIB
-	LIBS     += -lgif
+CPPFLAGS += -DHAVE_GIFLIB
+LIBS     += -lgif
 # libexif: jpeg auto-orientation, exif thumbnails
 	CPPFLAGS += -DHAVE_LIBEXIF
 	LIBS     += -lexif
