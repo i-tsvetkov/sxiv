@@ -73,16 +73,16 @@ void parse_options(int argc, char **argv) {
       print_usage();
       exit(EXIT_FAILURE);
     case 'a':
-      _options.animate = true;
+      _options.animate = !_options.animate;
       break;
     case 'b':
-      _options.hide_bar = true;
+      _options.hide_bar = !_options.hide_bar;
       break;
     case 'c':
-      _options.clean_cache = true;
+      _options.clean_cache = !_options.clean_cache;
       break;
     case 'f':
-      _options.fullscreen = true;
+      _options.fullscreen = !_options.fullscreen;
       break;
     case 'G':
       n = strtol(optarg, &end, 0);
@@ -97,7 +97,7 @@ void parse_options(int argc, char **argv) {
       print_usage();
       exit(EXIT_SUCCESS);
     case 'i':
-      _options.from_stdin = true;
+      _options.from_stdin = !_options.from_stdin;
       break;
     case 'n':
       n = strtol(optarg, &end, 0);
@@ -109,13 +109,13 @@ void parse_options(int argc, char **argv) {
       _options.res_name = optarg;
       break;
     case 'o':
-      _options.to_stdout = true;
+      _options.to_stdout = !_options.to_stdout;
       break;
     case 'q':
-      _options.quiet = true;
+      _options.quiet = !_options.quiet;
       break;
     case 'r':
-      _options.recursive = true;
+      _options.recursive = !_options.recursive;
       break;
     case 'S':
       n = strtol(optarg, &end, 0);
@@ -130,7 +130,7 @@ void parse_options(int argc, char **argv) {
       _options.scalemode = s - scalemodes;
       break;
     case 't':
-      _options.thumb_mode = true;
+      _options.thumb_mode = !_options.thumb_mode;
       break;
     case 'v':
       print_version();
