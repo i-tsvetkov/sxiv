@@ -466,12 +466,12 @@ void tns_mark(tns_t *tns, int n, bool mark) {
   if (n >= 0 && n < *tns->cnt && tns->thumbs[n].im != NULL) {
     win_t *win = tns->win;
     thumb_t *t = &tns->thumbs[n];
-    unsigned long col = win->fullscreen ? win->fscol : win->bgcol;
+    unsigned long col = win->fullscreen ? win->fscol.pixel : win->bgcol.pixel;
     int x = t->x + t->w - 3 * tns->bw - THUMB_PADDINGS[tns->zl],
         y = t->y + t->h - 3 * tns->bw - THUMB_PADDINGS[tns->zl];
 
     win_draw_rect(win, x - tns->bw, y - tns->bw, 4 * tns->bw, 4 * tns->bw, true, 1, col);
-    win_draw_rect(win, x, y, 2 * tns->bw, 2 * tns->bw, true, 1, win->selcol);
+    win_draw_rect(win, x, y, 2 * tns->bw, 2 * tns->bw, true, 1, win->selcol.pixel);
 
     tns->dirty = true; /* I Have No Idea What I’m Doing (https://youtu.be/4Rg3sAb8Id8) */
 
@@ -487,9 +487,9 @@ void tns_highlight(tns_t *tns, int n, bool hl) {
     unsigned long col;
 
     if (hl)
-      col = win->selcol;
+      col = win->selcol.pixel;
     else
-      col = win->fullscreen ? win->fscol : win->bgcol;
+      col = win->fullscreen ? win->fscol.pixel : win->bgcol.pixel;
 
     int x = t->x - THUMB_PADDINGS[tns->zl] - tns->bw / 2 - tns->bw % 2,
         y = t->y - THUMB_PADDINGS[tns->zl] - tns->bw / 2 - tns->bw % 2,

@@ -217,6 +217,7 @@ bool check_timeouts(struct timeval *t) {
 void open_info(void) {
   static pid_t pid;
   int pfd[2];
+	char w[12], h[12];
 
   if (info.f.err != 0 || info.open || win.bar.h == 0)
     return;
@@ -232,7 +233,9 @@ void open_info(void) {
   if ((pid = fork()) == 0) {
     close(pfd[0]);
     dup2(pfd[1], 1);
-    execl(info.f.cmd, info.f.cmd, files[fileidx].name, NULL);
+		snprintf(w, sizeof(w), "%d", img.w);
+		snprintf(h, sizeof(h), "%d", img.h);
+		execl(info.f.cmd, info.f.cmd, files[fileidx].name, w, h, NULL);
     error(EXIT_FAILURE, errno, "exec: %s", info.f.cmd);
   }
   close(pfd[1]);
@@ -375,9 +378,8 @@ void update_info(void) {
   if (ow_info) {
     fn = strlen(files[fileidx].name);
     if (fn < l->size &&
-        win_textwidth(files[fileidx].name, fn, true) +
-                win_textwidth(r->buf, r->p - r->buf, true) <
-            win.w) {
+        win_textwidth(&win.env, files[fileidx].name, fn, true) +
+        win_textwidth(&win.env, r->buf, r->p - r->buf, true) < win.w) {
       strncpy(l->buf, files[fileidx].name, l->size);
     } else {
       strncpy(l->buf, files[fileidx].base, l->size);
