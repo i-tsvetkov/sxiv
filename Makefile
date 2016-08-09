@@ -6,7 +6,7 @@ MANPREFIX := $(PREFIX)/share/man
 CC        ?= gcc
 CFLAGS    += -std=c99 -Wall -pedantic
 CPPFLAGS  += -I/usr/include/freetype2 -D_XOPEN_SOURCE=700
-LDFLAGS   += 
+LDFLAGS   +=
 LIBS      := -lImlib2 -lX11 -lXft
 
 # optional dependencies:
