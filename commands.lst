@@ -17,6 +17,7 @@ G_CMD(change_gamma)
 G_CMD(set_zoom)
 
 I_CMD(navigate)
+I_CMD(random_navigate)
 I_CMD(alternate)
 I_CMD(navigate_frame)
 I_CMD(toggle_animation)
@@ -32,4 +33,3 @@ I_CMD(slideshow)
 
 T_CMD(move_sel)
 T_CMD(reload_all)
-

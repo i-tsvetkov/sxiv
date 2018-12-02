@@ -264,6 +264,17 @@ bool ci_navigate(arg_t n) {
   }
 }
 
+bool ci_random_navigate(arg_t _) {
+  int n = rand() % filecnt;
+
+  if (n != fileidx) {
+    load_image(n);
+    return true;
+  } else {
+    return false;
+  }
+}
+
 bool ci_alternate(arg_t _) {
   load_image(alternate);
   return true;
